@@ -11,7 +11,7 @@ with sync_playwright() as playwright:
     #locate a link element with "Docs" text
     docs_button = page.get_by_role('link', name="Docs")
     docs_button.click()
-    #get url
+    #get url and print it
     print("Docs:", page.url)
 
     #locator
