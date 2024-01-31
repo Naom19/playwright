@@ -12,6 +12,10 @@ with sync_playwright() as playwright:
     docs_button = page.get_by_role('link', name="Docs")
     docs_button.click()
     #get url
+    print("Docs:", page.url)
 
+    #locator
+    docs_button= page.get_by_role('button', name= "Sign Up")
+    docs_button.click()
 
     browser.close()
