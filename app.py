@@ -11,7 +11,7 @@ with sync_playwright() as playwright:
 
     page.goto(
         "https://bootswatch.com/default",
-        wait_until='load', 
+        wait_until='domcontentloaded', # we can skip the 'load' to obtain just the html
         )
 
     time_taken = perf_counter() - start
