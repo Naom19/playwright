@@ -1,16 +1,20 @@
 from playwright.sync_api import sync_playwright
-
+from time import perf_counter #gives us time stamps 
 
 with sync_playwright() as playwright:
     #lauch browser
     browser = playwright.chromium.launch(headless=False, slow_mo= 500) #to see the interface
     #create a new page
     page = browser.new_page()
-    #visit playwright website
-    page.goto("https://bootswatch.com/default")
+    print("Page loading...")
+    start = perf_counter()
 
-    link = page.locator("a.dropdown-item").first.click()
-    # instead of timeout we set a force on the click method
-    link.click(force = True)
+    page.goto(
+        "https://bootswatch.com/default",
+        wait_until='load', 
+        )
 
+    time_taken = perf_counter() - start
+    print(f"...Page loaded in {round(time_taken, 2)}s")
+    # 2 decimal places
     browser.close()
