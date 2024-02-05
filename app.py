@@ -10,6 +10,7 @@ with sync_playwright() as playwright:
     page.goto("https://bootswatch.com/default")
 
     link = page.locator("a.dropdown-item").first.click()
+    # instead of timeout we set a force on the click method
     link.click(force = True)
 
     browser.close()
