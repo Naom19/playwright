@@ -9,10 +9,7 @@ with sync_playwright() as playwright:
     #visit playwright website
     page.goto("https://bootswatch.com/default")
 
-    #locate a by role
-    button = page.get_by_role("button", name="Primary").firstbutton.click()
-    button.click()
-    #get url 
-    #print("Docs:", page.url)
+    link = page.locator("a.dropdown-item").first.click()
+    link.click(force = True)
 
     browser.close()
