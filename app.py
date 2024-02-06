@@ -1,4 +1,5 @@
 #save auth state
+from creds import *
 from playwright.sync_api import sync_playwright
 
 
@@ -12,13 +13,13 @@ with sync_playwright() as playwright:
 
     # Enter email address
     email_input = page.get_by_label("Email or phone")
-    email_input.fill(YOUR_EMAIL)
+    email_input.fill(EMAIL)
 
     page.get_by_role("button", name="Next").click()
 
     # Enter password (locators would be the same)
     password_input = page.get_by_label("Enter your password")
-    password_input.fill(YOUR_PASSWORD)
+    password_input.fill(PASSWORD)
 
     page.get_by_role("button", name="Next").click()
 
@@ -28,7 +29,7 @@ with sync_playwright() as playwright:
 
     # Save authentication state (.storage_state() method)
     context.storage_state( #create the auth inside playwright, and create a json file
-        path="playwright/.auth/storage_state.json",
+        path="playwright/.auth/creds.json",
 	# make sure 👆 you've created the playwright/.auth directory
     )
 
