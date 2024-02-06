@@ -1,17 +1,35 @@
-import asyncio
-from playwright.async_api import async_playwright
+#save auth state
+from playwright.sync_api import sync_playwright
 
 
-async def main():
-    async with async_playwright() as playwright:
-        browser = await playwright.chromium.launch(headless=False)
-        page = await browser.new_page()
+with sync_playwright() as playwright:
 
-        await page.goto("https://playwright.dev")
+    browser = playwright.chromium.launch(headless=False, slow_mo=500)
+    page = browser.new_page()
 
-        print(await page.title())
+    # Visit google accounts
+    page.goto("https://accounts.google.com")
 
-        await browser.close()
+    # Enter email address
+    email_input = page.get_by_label("Email or phone")
+    email_input.fill(YOUR_EMAIL)
 
+    page.get_by_role("button", name="Next").click()
 
-asyncio.run(main())
+    # Enter password (locators would be the same)
+    password_input = page.get_by_label("Enter your password")
+    password_input.fill(YOUR_PASSWORD)
+
+    page.get_by_role("button", name="Next").click()
+
+    # Pause if your account has two-factor authentication
+    # then complete the same before resuming
+    page.pause()
+
+    # Save authentication state (.storage_state() method)
+    context.storage_state( #create the auth inside playwright, and create a json file
+        path="playwright/.auth/storage_state.json",
+	# make sure 👆 you've created the playwright/.auth directory
+    )
+
+    browser.close()
