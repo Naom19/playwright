@@ -1,7 +1,7 @@
 from playwright.sync_api import sync_playwright
 
 
-def on_load(page):
+def on_request(request):
     print("Page loaded", page)
 
 with sync_playwright() as playwright:
@@ -11,7 +11,7 @@ with sync_playwright() as playwright:
     page = browser.new_page()
 
 
-    page.on("load", on_load)
+    page.on("request", on_request)
     page.goto("https://bootswatch.com/default")
 
     browser.close()
