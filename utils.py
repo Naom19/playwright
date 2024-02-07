@@ -7,3 +7,4 @@ dt: dict[str, int] = {"key": 0 }
 
 def root(num):
     return pow(num, .5)
+    
