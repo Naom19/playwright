@@ -10,5 +10,7 @@ def test_page_has_get_started_link(page: Page):
 
     link = page.get_by_role("link", name="GET STARTED")
     link.click()
+    #to take an screenshot
+    page.screenshot(path="docs.jpg", full_page=True)
 
     assert page.url == DOCS_URL
